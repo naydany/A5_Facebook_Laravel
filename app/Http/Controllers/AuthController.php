@@ -14,6 +14,8 @@ use Illuminate\Support\Str;
 class AuthController extends Controller
 {
 
+    
+    
     public function register(Request $request){
         $request->validate([
             'name' => 'required',
@@ -44,7 +46,7 @@ class AuthController extends Controller
             'user' => $user
         ]);
     }
-
+    
     public function login(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
