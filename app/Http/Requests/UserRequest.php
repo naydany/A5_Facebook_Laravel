@@ -23,11 +23,10 @@ class UserRequest extends FormRequest
     {
         return [
             //
-            'name' =>'sometimes|required|string|max:255',
-            'email' =>'sometimes|required|string|email|max:255|unique:users',
+            'name' =>'sometimes|required|string',
+            'email' =>'sometimes|required|string',
             'password' =>'sometimes|required|string',
-            'profile_image' =>'sometimes|required|string'
-            // 'password_confirmation' =>'sometimes|required|string|min:8|confirmed',
+            'profile_image' =>'sometimes|required|string',
         ];
     }
 }

@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Http\Resources\UserResource;
+use Exception;
+use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
@@ -14,13 +18,5 @@ class UserController extends Controller
             'data'  => $request->user(),
         ]);
     }
-    public function index(Request $request){
-        $user = $request->user();
-        $permissions = $user->getAllPermissions();
-        $roles = $user->getRoleNames();
-        return response()->json([
-           'message' => 'Login success',
-            'data' =>$user,
-        ]);
-    }
+
 }

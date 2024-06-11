@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,13 @@ use App\Http\Controllers\UserController;
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
+Route::post('/logout', [AuthController::class, 'logout']);
 Route::get('/me', [AuthController::class, 'index'])->middleware('auth:sanctum');
 
-Route::get('/user/list', [UserController::class, 'index']);
+Route::group([
+   'middleware' => ['auth:sanctum']
+]
+, function () {
+    Route::post('/profile', [ProfileController::class, 'profile']);
+    Route::post('/profile/update', [ProfileController::class, 'updateProfile']);
+});
