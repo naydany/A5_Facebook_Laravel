@@ -6,21 +6,58 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+
 
 class AuthController extends Controller
 {
+
+    
+    
+    public function register(Request $request){
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+
+        $user_exist = User::where('email', $request->email)->first();
+        if($user_exist){
+            return response([
+                'message' => "Email Already Exist !",
+                'success' => false,
+            ]);
+        }
+        
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'email_verified_at' => now(),
+            'password' => Hash::make($request->password),
+            'remember_token' => Str::random(20),
+
+        ]);
+    
+        return response([
+            'message' => "Create has been success",
+            'success' => true,
+            'user' => $user
+        ]);
+    }
+    
     public function login(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
             'email'     => 'required|string|max:255',
             'password'  => 'required|string'
-          ]);
+        ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors());
         }
-
+ 
         $credentials = $request->only('email', 'password');
 
         if (!Auth::attempt($credentials)) {

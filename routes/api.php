@@ -16,6 +16,7 @@ use App\Http\Controllers\UserController;
 */
 
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
 Route::get('/me', [AuthController::class, 'index'])->middleware('auth:sanctum');
 
 Route::get('/user/list', [UserController::class, 'index']);
