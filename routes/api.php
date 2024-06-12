@@ -32,20 +32,9 @@ Route::group([
     Route::post('/profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
 });
 
+
+//Comment
 Route::get('/comment/list', [CommentController::class, 'index']);
 Route::post('/comment/create', [CommentController::class, 'store']);
 Route::put('/comment/update/{id}', [CommentController::class, 'updateComment']);
 Route::delete('/comment/delete/{id}', [CommentController::class, 'deleteComment']);
-
-
-
-// Group of Comment
-// Route::group([
-//    'middleware' => ['auth:sanctum']
-// ]
-// , function () {
-//     Route::get('/comment/list', [CommentController::class, 'index']);
-//     Route::post('/comment/create', [CommentController::class, 'comment']);
-//     Route::post('/comment/update', [CommentController::class, 'updateComment']);
-//     Route::post('/comment/delete', [CommentController::class, 'deleteComment']);
-// });

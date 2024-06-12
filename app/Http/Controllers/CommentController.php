@@ -19,10 +19,10 @@ class CommentController extends Controller
         $comments = Comment::all();
         try{
             $comments = CommentResource::collection($comments);
-            return response()->json(['data'=>$comments, 'message'=>'Request comments successfully']);
+            return response()->json(['comment'=>$comments, 'message'=>'Request comments successfully']);
         }catch(Exception $e){
             return response()->json([
-               'data' => false,
+               'comment' => false,
                'message' => $e->getMessage()
             ]);
         }
@@ -37,10 +37,10 @@ class CommentController extends Controller
         $comment = Comment::create($request->all());
         try{
             $comment = new CommentResource($comment);
-            return response()->json(['data'=>$comment, 'message'=>'Request comments successfully']);
+            return response()->json(['comment'=>$comment, 'message'=>'Request comments successfully']);
         }catch(Exception $e){
             return response()->json([
-               'data' => false,
+               'comment' => false,
                'message' => $e->getMessage()
             ]);
         }
@@ -55,10 +55,10 @@ class CommentController extends Controller
         $comment = Comment::findOrFail($id);
         try{
             $comment = new CommentResource($comment);
-            return response()->json(['data'=>$comment, 'message'=>'Request comments successfully']);
+            return response()->json(['comment'=>$comment, 'message'=>'Request comments successfully']);
         }catch(Exception $e){
             return response()->json([
-               'data' => false,
+               'comment' => false,
                'message' => $e->getMessage()
             ]);
         }
@@ -74,10 +74,10 @@ class CommentController extends Controller
         $comment->update($request->all());
         try{
             $comment = new CommentResource($comment);
-            return response()->json(['data'=>$comment, 'message'=>'Update comments successfully']);
+            return response()->json(['comment'=>$comment, 'message'=>'Update comments successfully']);
         }catch(Exception $e){
             return response()->json([
-               'data' => false,
+               'comment' => false,
                'message' => $e->getMessage()
             ]);
         }
@@ -96,7 +96,7 @@ class CommentController extends Controller
             return response()->json(['message'=>'Delete comments successfully']);
         }catch(Exception $e){
             return response()->json([
-               'data' => false,
+               'comment' => false,
                'message' => $e->getMessage()
             ]);
         }
