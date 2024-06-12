@@ -23,9 +23,10 @@ class UpdatePostRequest extends FormRequest
     {
         $rules = [
             //
-            'title'=>'nullable|string',
-            'content'=>'nullable|string',
-            'auth_id' => 'required|integer|exists:users,id',
+            'title' => 'nullable|string',
+            'content' => 'nullable|string',
+            'images' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048', // Max 2MB
+            'user_id' => 'required|integer|string|exists:users,id',
         ];
         return $rules;
     }
