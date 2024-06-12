@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
+    /*
      * Run the migrations.
      */
     public function up(): void
@@ -15,13 +15,15 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('content')->nullable();
-            $table->integer('auth_id');
-            $table->string('tags')->nullable();
+            $table->unsignedBigInteger('auth_id');
             $table->timestamps();
+
+            $table->foreign('auth_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
-    /**
+    /*
+    
      * Reverse the migrations.
      */
     public function down(): void
