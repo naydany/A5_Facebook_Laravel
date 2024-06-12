@@ -14,8 +14,8 @@ class Comment extends Model
     protected $fillable = [
         'comment',
         'user_id',
-        // 'post_id',
-        // 'like_id',
+        'post_id',
+        'like_id',
     ];
 
     public function user():belongsTo{

@@ -25,7 +25,7 @@ class PostRequest extends FormRequest
             //
             'title'=>'nullable|string',
             'content'=>'nullable|string',
-            'auth_id' => 'required|integer|exists:users,id',
+            'user_id' => 'required|integer|exists:users,id',
         ];
         return $rules;
     }

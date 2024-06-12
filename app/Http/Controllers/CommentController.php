@@ -37,7 +37,7 @@ class CommentController extends Controller
         $comment = Comment::create($request->all());
         try{
             $comment = new CommentResource($comment);
-            return response()->json(['comment'=>$comment, 'message'=>'Request comments successfully']);
+            return response()->json(['comment'=> true,'message'=>'User comments successfully']);
         }catch(Exception $e){
             return response()->json([
                'comment' => false,
@@ -55,7 +55,7 @@ class CommentController extends Controller
         $comment = Comment::findOrFail($id);
         try{
             $comment = new CommentResource($comment);
-            return response()->json(['comment'=>$comment, 'message'=>'Request comments successfully']);
+            return response()->json(['comment'=>$comment, 'message'=>'show comments successfully']);
         }catch(Exception $e){
             return response()->json([
                'comment' => false,
