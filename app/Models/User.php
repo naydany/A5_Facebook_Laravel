@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -16,7 +17,7 @@ class User extends Authenticatable
     use HasRoles;
     use HasApiTokens;
 
-    /**
+    /*
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -28,7 +29,12 @@ class User extends Authenticatable
         'profile_image',
     ];
 
-    /**
+    public function posts(): HasMany
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    /*
      * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>

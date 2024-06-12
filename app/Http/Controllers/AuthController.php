@@ -9,12 +9,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use App\Http\Resources\ShowUserPostsResource;
+use App\Http\Resources\UserPostsResource\UserPostsResource;
 
 
 class AuthController extends Controller
 {
+
     
-    //----------register
+    
     public function register(Request $request){
         $request->validate([
             'name' => 'required',
@@ -38,10 +41,12 @@ class AuthController extends Controller
             'remember_token' => Str::random(20),
 
         ]);
+        $token = $user->createToken('auth_token')->plainTextToken;
     
         return response([
             'message' => "Create has been success",
             'success' => true,
+            'access_token'  => $token,
             'user' => $user
         ]);
     }
@@ -85,8 +90,6 @@ class AuthController extends Controller
         ],200);
     }
     
-
-    //-------------get infor user login
     public function index(Request $request)
     {
         $user = $request->user();
@@ -123,6 +126,25 @@ class AuthController extends Controller
             return response()->json([
                 'message'=>'Old password does not matched',
             ],400);
+        }
+        
+    }
+    public function user_posts()
+    {
+        $users = User::all();
+        try{
+            return response()->json(['data' => UserPostsResource::collection($users), 'success'=>true, 'message'=>'get user post successfully', 'status'=>200]);
+        }catch (\Exception $e){
+            return response()->json(['data' => $e->getMessage(),'success'=>false,'message'=>$e->getMessage(),'status'=>404]);
+        }
+    }
+    public function show_user_posts(string|int $id)
+    {
+        try{
+            $user = User::findOrFail($id);
+            return response()->json(['data' => new ShowUserPostsResource($user), 'success'=>true, 'message'=>'get user post successfully', 'status'=>200]);
+        }catch (\Exception $e){
+            return response()->json(['data' => $e->getMessage(),'success'=>false,'message'=>$e->getMessage(),'status'=>404]);
         }
     }
 }
