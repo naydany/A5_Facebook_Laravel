@@ -28,7 +28,7 @@ Route::group([
    'middleware' => ['auth:sanctum']
 ]
 , function () {
-    Route::get('/profile', [ProfileController::class, 'profile'])->name('profile.view');
+    Route::get('/profile/detail', [ProfileController::class, 'profile'])->name('profile.view');
     Route::post('/profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
 });
 
