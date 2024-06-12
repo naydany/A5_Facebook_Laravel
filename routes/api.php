@@ -1,10 +1,11 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LikesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\CommentController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +38,11 @@ Route::get('/comment/list', [CommentController::class, 'index']);
 Route::post('/comment/create', [CommentController::class, 'store']);
 Route::put('/comment/update/{id}', [CommentController::class, 'updateComment']);
 Route::delete('/comment/delete/{id}', [CommentController::class, 'deleteComment']);
+
+
+Route::get('/post', [PostController::class,'index']);
+Route::get('/post/show/{id}', [PostController::class, 'show']);
+Route::post('/post/create', [PostController::class, 'store']);
+Route::put('/post/edit/{id}', [PostController::class, 'update']);
+Route::delete('/post/delete/{id}', [PostController::class, 'destroy']);
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');

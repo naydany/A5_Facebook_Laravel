@@ -4,8 +4,9 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Models\Post;
 
-class UserResource extends JsonResource
+class ShowUserPostsResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,8 +19,8 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'password' => $this->password,
-            'profile_image' => $this->profile_image,
+            'posts_numbers' => Post::where('auth_id', $this->id)->count(),
+            'posts_content'=> Post::where('auth_id', $this->id)->get(),
         ];
     }
 }

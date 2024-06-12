@@ -6,28 +6,25 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /*
+    /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('likes', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('content')->nullable();
-            $table->unsignedBigInteger('auth_id');
+            $table->integer('emoji_id');
+            $table->integer('post_id');
+            $table->integer('user_id');
             $table->timestamps();
-
-            $table->foreign('auth_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
-    /*
-    
+    /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('likes');
     }
 };
