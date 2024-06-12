@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Likes;
+use Exception;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 
@@ -14,13 +15,17 @@ class LikesController extends Controller
         'post_id'=> 'require',
       ]);
 
-      Likes::created([
+      $like = Likes::created([
         'emoji_id'=>$request->emoji_id,
         'post_id'=>auth()->user()->id,
         'user_id'=>$request->user_id,
       ]);
        
-      return response('liked');
+      try{
+          return response()->json(['message'=>'liked','like'=>$like]);  
+      }catch(Exception $e){
+        return $e;
+      }
    }
    
 }
