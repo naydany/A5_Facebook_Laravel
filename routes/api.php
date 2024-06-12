@@ -16,15 +16,11 @@ use App\Http\Controllers\CommentController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
-Route::prefix('auth')->group(function(){
-    Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/register', [AuthController::class, 'register']);
-    Route::get('/me', [AuthController::class, 'index'])->middleware('auth:sanctum');
-    Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
-    Route::post('/change_password',[AuthController::class,'change_password'])->middleware('auth:sanctum');
-});
-
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::get('/me', [AuthController::class, 'index'])->middleware('auth:sanctum');
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+Route::post('/change_password',[AuthController::class,'change_password'])->middleware('auth:sanctum');
 
 // Group of Profile
 Route::group([
