@@ -7,7 +7,7 @@ use App\Models\User;
 use Exception;
 use Hash;
 use Illuminate\Support\Facades\Validator;
-use File;
+use Illuminate\Support\Facades\File;
 
 class ProfileController extends Controller
 {
