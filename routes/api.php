@@ -25,7 +25,7 @@ Route::prefix('auth')->group(function(){
     Route::post('/change_password',[AuthController::class,'change_password'])->middleware('auth:sanctum');
 });
 
-Route::post('addlike',[LikesController::class,'addLike'])->middleware('auth:sanctum');
+Route::post('/addlike',[LikesController::class,'addLike'])->middleware('auth:sanctum');
 
 Route::group([
    'middleware' => ['auth:sanctum']
