@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LikesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
@@ -24,6 +25,8 @@ Route::prefix('auth')->group(function(){
     Route::post('/change_password',[AuthController::class,'change_password'])->middleware('auth:sanctum');
 });
 
+Route::post('addlike',[LikesController::class,'addLike'])->middleware('auth:sanctum');
+
 Route::group([
    'middleware' => ['auth:sanctum']
 ]
@@ -31,3 +34,4 @@ Route::group([
     Route::post('/profile', [ProfileController::class, 'profile']);
     Route::post('/profile/update', [ProfileController::class, 'updateProfile']);
 });
+
