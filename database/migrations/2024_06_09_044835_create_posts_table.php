@@ -15,14 +15,16 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('content')->nullable();
+            $table->string('images')->nullable(); 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
+
         });
     }
 
     /*
-    
+
      * Reverse the migrations.
      */
     public function down(): void

@@ -19,8 +19,8 @@ class ShowUserPostsResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'posts_numbers' => Post::where('auth_id', $this->id)->count(),
-            'posts_content'=> Post::where('auth_id', $this->id)->get(),
+            'posts_numbers' => Post::where('user_id', $this->id)->count(),
+            'posts_body'=> Post::where('user_id', $this->id)->get(),
         ];
     }
 }
