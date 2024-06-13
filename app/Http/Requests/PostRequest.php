@@ -22,11 +22,12 @@ class PostRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            //
-            'title'=>'nullable|string',
-            'content'=>'nullable|string',
-            'auth_id' => 'required|integer|exists:users,id',
+            'title' => 'required|string',
+            'content' => 'nullable|string',
+            'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048', // Max 2MB
+            'user_id' => 'required|integer|exists:users,id',
         ];
+
         return $rules;
     }
 }

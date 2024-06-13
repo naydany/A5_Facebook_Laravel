@@ -17,7 +17,7 @@ class ProfileController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'User profile retrieved successfully',
-            // 'data' => $userData,
+            'data' => $userData,
             'user_id' => auth()->user()->id
         ]);
     }

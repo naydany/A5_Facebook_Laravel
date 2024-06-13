@@ -13,6 +13,6 @@ class Likes extends Model
     protected $fillable =[
         'emoji_id',
         'post_id',
-        'user_id'
+        'user_id',
     ];
 }
