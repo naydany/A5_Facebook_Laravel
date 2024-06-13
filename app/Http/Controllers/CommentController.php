@@ -50,7 +50,7 @@ class CommentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CommentRe $comment, string|int $id)
+    public function show(Comment $comment, string|int $id)
     {
         //
         $comment = Comment::findOrFail($id);
