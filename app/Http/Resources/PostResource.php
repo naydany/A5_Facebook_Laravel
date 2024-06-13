@@ -19,6 +19,7 @@ class PostResource extends JsonResource
             'title' => $this->title,
             'content' => $this->content,
             'auth_id' => $this->auth_id,
+            'likes_count' =>$this-> getLikes->count(),
         ];
     }
 }

@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Http\Resources\PostResource;
+use App\Models\Likes;
+use Exception;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -94,4 +97,5 @@ class PostController extends Controller
             return response()->json(['data'=> $e->getMessage(), 'success'=> false, 'message'=> $e->getMessage(),'status'=>404]);
         }
     }
+
 }

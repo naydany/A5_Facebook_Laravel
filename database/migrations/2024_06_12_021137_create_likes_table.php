@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('likes', function (Blueprint $table) {
             $table->id();
             $table->integer('emoji_id')->nullable();
-            $table->integer('post_id')->nullable();
-            $table->integer('user_id')->nullable();
-            $table->softDeletes('deleted_at');
+            $table->integer('post_id');
+            $table->integer('user_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -24,7 +24,7 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void
+    public function down(): void    
     {
         Schema::dropIfExists('likes');
     }

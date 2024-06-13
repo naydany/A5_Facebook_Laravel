@@ -30,7 +30,7 @@ Route::prefix('auth')->group(function(){
 
 });
 
-Route::post('/addlike',[LikesController::class,'addLike'])->middleware('auth:sanctum');
+Route::post('/add-like',[LikesController::class,'addLike'])->middleware('auth:sanctum');
 
 Route::group([
    'middleware' => ['auth:sanctum']
