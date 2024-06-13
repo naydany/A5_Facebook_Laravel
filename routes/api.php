@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\AddFreindController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,6 @@ Route::post('/post/create', [PostController::class, 'store']);
 Route::put('/post/edit/{id}', [PostController::class, 'update']);
 Route::delete('/post/delete/{id}', [PostController::class, 'destroy']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+
+
+Route::post('/send-request', [AddFreindController::class, 'sendRequest']);
