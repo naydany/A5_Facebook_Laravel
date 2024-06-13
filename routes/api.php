@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\AddFreindController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,4 +49,6 @@ Route::get('/post/show/{id}', [PostController::class, 'show']);
 Route::post('/post/create', [PostController::class, 'store']);
 Route::put('/post/edit/{id}', [PostController::class, 'update']);
 Route::delete('/post/delete/{id}', [PostController::class, 'destroy']);
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+
+
+Route::post('/send-request', [AddFreindController::class, 'sendRequest']);
