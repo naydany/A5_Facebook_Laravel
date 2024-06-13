@@ -12,9 +12,15 @@ class AddFreindController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function showList()
     {
         //
+        $freind = AddFreind::All();
+        return response()->json([
+            'data' => $freind,    
+            'message' => 'Request friend successfully',
+            'success' => true,
+        ]);
     }
 
     /**

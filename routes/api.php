@@ -64,3 +64,4 @@ Route::prefix('auth')->group(function(){
 
 // request to friends
 Route::post('/send-request', [AddFreindController::class, 'sendRequest']);
+Route::get('/showList/friend', [AddFreindController::class, 'showList']);
