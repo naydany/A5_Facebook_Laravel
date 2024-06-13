@@ -33,6 +33,17 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
+    public function sentFriendRequests()
+    {
+        return $this->hasMany(AddFreind::class, 'sender_id');
+    }
+
+    public function receivedFriendRequests()
+    {
+        return $this->hasMany(AddFreind::class, 'receiver_id');
+    }
+
+
     /*
      * The attributes that should be hidden for serialization.
      *

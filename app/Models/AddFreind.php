@@ -13,6 +13,7 @@ class AddFreind extends Model
     protected $fillable = [
         'sender_id',
         'receiver_id',
+        'status'
     ];
 
     public function sender(): BelongsTo{

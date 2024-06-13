@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('sender_id');
             $table->unsignedBigInteger('receiver_id');
+            $table->boolean('status')->default('pending');;
             $table->timestamps();
 
             $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');
