@@ -20,17 +20,12 @@ class CommentResource extends JsonResource
         return [
             'id' => $this->id,
             'body' => $this->comment,
-            'post_id' => $this->post_id,
+            'post_id' => $this->post->title,
             'user_name' => $this->user->name,
             'user_email' => $this->user->email,
             'user_image' => $this->user->image,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            // 'total_like' => Likes::where('post_id', $this->post_id)->count(),
-            // 'total_comment' => Comment::where('post_id', $this->post_id)->count(),
-            // 'user_id' => new UserResource($this->user),
-            // 'total_comment' => Comment::where('id', $this->id)->count(),
-            // 'show_like' => new Likes(),
         ];
     }
 }

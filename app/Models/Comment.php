@@ -25,7 +25,4 @@ class Comment extends Model
     public function post():belongsTo{
         return $this->belongsTo(Post::class);
     }
-    // public function likes():belongsTo{
-    //     return $this->belongsTo(Likes::class);
-    // }
 }
