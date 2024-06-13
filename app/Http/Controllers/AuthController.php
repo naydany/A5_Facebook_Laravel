@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use App\Http\Resources\ShowUserPostsResource;
 use App\Http\Resources\UserPostsResource as ResourcesUserPostsResource;
 use App\Http\Resources\UserPostsResource\UserPostsResource;
+// use App\Http\Resources\UserPostsResource;
 
 
 class AuthController extends Controller

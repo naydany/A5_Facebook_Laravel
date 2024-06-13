@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeCommentController;
+use App\Http\Controllers\AddFreindController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,3 +61,6 @@ Route::prefix('auth')->group(function(){
     Route::delete('/post/delete/{id}', [PostController::class, 'destroy']);
     Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 });
+
+// request to friends
+Route::post('/send-request', [AddFreindController::class, 'sendRequest']);
