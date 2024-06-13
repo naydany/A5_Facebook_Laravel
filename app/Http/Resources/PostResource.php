@@ -19,6 +19,8 @@ class PostResource extends JsonResource
             'user_id' => $this->user_id,
             'title' => $this->title,
             'content' => $this->content,
+            'auth_id' => $this->auth_id,
+            'likes_count' =>$this-> getLikes->count(),
             'images' => $this->images, // Assuming a hasMany relationship
             'created_at' => $this->created_at->toDateTimeString(),
             'updated_at' => $this->updated_at->toDateTimeString(),

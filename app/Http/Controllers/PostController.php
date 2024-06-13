@@ -163,4 +163,5 @@ class PostController extends Controller
             return response()->json(['data'=> $e->getMessage(), 'success'=> false, 'message'=> $e->getMessage(),'status'=>404]);
         }
     }
+
 }
