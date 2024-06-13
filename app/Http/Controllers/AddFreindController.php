@@ -23,39 +23,38 @@ class AddFreindController extends Controller
     public function sendRequest(Request $request)
     {
         $request->validate([
-            'sender_id' => 'required|exists:users,id',
             'receiver_id' => 'required|exists:users,id',
         ]);
-        
-        
-        $sender_id = $request->input('sender_id');
+    
+        $sender_id = auth()->id();
         $receiver_id = $request->input('receiver_id');
-
-        // // Check if a request already exists
+    
+        // Check if a request already exists
         if (AddFreind::where('sender_id', $sender_id)->where('receiver_id', $receiver_id)->exists()) {
             return response()->json(['message' => 'Friend request already sent'], 400);
         }
-        $add_freinds = new AddFreind();
-
-        try{    
-            $friendRequest = $add_freinds::create([
+    
+        try {
+            $friendRequest = AddFreind::create([
                 'sender_id' => $sender_id,
                 'receiver_id' => $receiver_id,
+                'status' => 'pending'  // Assuming 'pending' is the intended initial status
             ]);
+    
             return response()->json([
                 'data' => $friendRequest,
                 'message' => 'Request sent successfully',
                 'success' => true,
-            ]);
-        }catch(\Exception $e){
+            ], 201);  // HTTP 201 Created
+        } catch (\Exception $e) {
             return response()->json([
-                'data' => $e->getMessage(),
-               'message' => $e->getMessage(),
-               'success' => false,
-            ]);
+                'message' => 'Failed to send friend request',
+                'error' => $e->getMessage(),
+                'success' => false,
+            ], 500);  // HTTP 500 Internal Server Error
         }
     }
-
+    
     /**
      * Display the specified resource.
      */

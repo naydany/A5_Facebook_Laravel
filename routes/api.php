@@ -62,4 +62,6 @@ Route::prefix('auth')->group(function(){
     // Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 });
 
-Route::post('/send-request', [AddFreindController::class, 'sendRequest']);
+// Route::post('/send-request', [AddFreindController::class, 'sendRequest']);
+
+Route::middleware('auth:sanctum')->post('/friend-request', [AddFreindController::class, 'sendRequest']);
