@@ -26,7 +26,7 @@ class CommentRequest extends FormRequest
             'comment' =>'sometimes|required|string',
             'user_id' =>'sometimes|required|integer',
             'post_id' =>'sometimes|required|integer',
-            'like_id' =>'sometimes|required|integer',
+            // 'like_id' =>'sometimes|required|integer',
         ];
     }
 }
