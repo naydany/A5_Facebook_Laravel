@@ -6,19 +6,33 @@ use App\Models\AddFreind;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Http\Resources\FriendResource;
 
 class AddFreindController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function showList()
+
+    public function Friends($id)
     {
-        //
-        $freind = AddFreind::All();
+        $friends = AddFreind::where('sender_id', $id)
+            ->orWhere('receiver_id', $id)
+            ->with('receiver')
+            ->get(['id', 'receiver_id']);
+
+        $friends = $friends->map(function ($friend) {
+            return [
+                'id' => $friend->id,
+                'receiver_name' => $friend->receiver->name,
+                'email' => $friend->receiver->email,
+                'image' => $friend->receiver->image,
+            ];
+        });
+
         return response()->json([
-            'data' => $freind,    
-            'message' => 'Request friend successfully',
+            'friends' => $friends,
+            'message' => 'Request friends successfully',
             'success' => true,
         ]);
     }
