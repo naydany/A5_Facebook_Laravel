@@ -14,17 +14,18 @@ class AddFreindController extends Controller
      * Display a listing of the resource.
      */
 
-    public function Friends($id)
+    public function Friends()
     {
-        $friends = AddFreind::where('sender_id', $id)
-            ->orWhere('receiver_id', $id)
+        $user_id = Auth()->id();
+        $friends = AddFreind::where('sender_id', $user_id)
+            ->orWhere('receiver_id', $user_id)
             ->with('receiver')
             ->get(['id', 'receiver_id']);
 
         $friends = $friends->map(function ($friend) {
             return [
                 'id' => $friend->id,
-                'receiver_name' => $friend->receiver->name,
+                'user_name' => $friend->receiver->name,
                 'email' => $friend->receiver->email,
                 'image' => $friend->receiver->image,
             ];

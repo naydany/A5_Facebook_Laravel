@@ -62,11 +62,12 @@ Route::prefix('auth')->group(function(){
 });
 
 // request to friends
-Route::post('/send-request', [AddFreindController::class, 'sendRequest']);
+// Route::post('/send-request', [AddFreindController::class, 'sendRequest']);
 Route::get('/Friends/list/{id}', [AddFreindController::class, 'Friends']);
 
 Route::prefix('auth')->group(function(){
     Route::middleware('auth:sanctum')->post('/friend-request', [AddFreindController::class, 'sendRequest']);
     Route::middleware('auth:sanctum')->post('/friend-request/confirm/{id}', [AddFreindController::class, 'confirmRequest']);
     Route::middleware('auth:sanctum')->delete('/friend-request/{id}', [AddFreindController::class, 'deleteRequest']);
+    Route::middleware('auth:sanctum')->get('/Friends/list', [AddFreindController::class, 'Friends']);
 });
