@@ -125,6 +125,41 @@ class AddFreindController extends Controller
             ], 404);
         }
     }
+
+    public function unfriend(Request $request, $friendId)
+    {
+        $userId = auth()->id();
+
+        // Find the friend relationship where the user is either the sender or receiver
+        $friendship = AddFreind::where('status', true)
+            ->where(function ($query) use ($userId, $friendId) {
+                $query->where(function ($query) use ($userId, $friendId) {
+                    $query->where('sender_id', $userId)
+                    ->where('receiver_id', $friendId);
+                })->orWhere(function ($query) use ($userId, $friendId) {
+                    $query->where('sender_id', $friendId)
+                    ->where('receiver_id', $userId);
+                });
+            })
+            ->first();
+
+        // If no friendship found, return an error response
+        if (!$friendship) {
+            return response()->json([
+                'message' => 'Friendship not found',
+                'success' => false,
+            ], 404);
+        }
+
+        // Delete the friendship
+        $friendship->delete();
+
+        return response()->json([
+            'message' => 'Unfriended successfully',
+            'success' => true,
+        ]);
+    }
+
     
     /**
      * Display the specified resource.

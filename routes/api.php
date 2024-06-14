@@ -70,4 +70,5 @@ Route::prefix('auth')->group(function(){
     Route::middleware('auth:sanctum')->post('/friend-request/confirm/{id}', [AddFreindController::class, 'confirmRequest']);
     Route::middleware('auth:sanctum')->delete('/friend-request/{id}', [AddFreindController::class, 'deleteRequest']);
     Route::middleware('auth:sanctum')->get('/friends/list', [AddFreindController::class, 'friendList']);
+    Route::middleware('auth:sanctum')->delete('/friends/unfriend/{friendId}', [AddFreindController::class, 'unfriend']);
 });
