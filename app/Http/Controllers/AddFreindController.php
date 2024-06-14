@@ -76,7 +76,27 @@ class AddFreindController extends Controller
         ]);
     }
 
-   
+    public function deleteRequest(Request $request, $sender_id)
+    {
+        $receiver_id = auth()->id();
+
+        // Find and delete the friend request based on sender_id and receiver_id
+        $deleted = AddFreind::where('sender_id', $sender_id)
+            ->where('receiver_id', $receiver_id)
+            ->delete();
+
+        if ($deleted) {
+            return response()->json([
+                'message' => 'Friend request deleted successfully',
+                'success' => true,
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Friend request not found or unauthorized to delete',
+                'success' => false,
+            ], 404);
+        }
+    }
     
     /**
      * Display the specified resource.
