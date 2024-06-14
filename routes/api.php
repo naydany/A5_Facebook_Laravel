@@ -63,7 +63,7 @@ Route::prefix('auth')->group(function(){
 
 // request to friends
 // Route::post('/send-request', [AddFreindController::class, 'sendRequest']);
-Route::get('/Friends/list/{id}', [AddFreindController::class, 'Friends']);
+// Route::get('/Friends/list/{id}', [AddFreindController::class, 'Friends']);
 
 Route::prefix('auth')->group(function(){
     Route::middleware('auth:sanctum')->post('/friend-request', [AddFreindController::class, 'sendRequest']);

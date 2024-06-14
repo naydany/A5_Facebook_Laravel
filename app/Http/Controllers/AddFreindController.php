@@ -34,6 +34,7 @@ class AddFreindController extends Controller
                  'id' => $friend->id,
                  'name' => $friend->name,
                  'email' => $friend->email,
+                 'image' => $friend->profile_image,
              ];
          });
      
