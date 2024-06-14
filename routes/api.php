@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ChangPassword\ForgetPassword;
 use App\Http\Controllers\LikesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -26,6 +27,10 @@ Route::prefix('auth')->group(function(){
     Route::post('/register', [AuthController::class, 'register']);
     Route::get('/me', [AuthController::class, 'index'])->middleware('auth:sanctum');
     Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+    Route::post('/change_password',[AuthController::class,'change_password'])->middleware('auth:sanctum');
+
+    Route::get('/reset_password',[ForgetPassword::class,'sendWelcomeEmail'])->middleware('auth:sanctum');
+    Route::post('/verify-code',[AuthController::class,'verify-code'])->middleware('auth:sanctum');
     Route::post('/change_password',[AuthController::class,'change_password'])->middleware('auth:sanctum');
 
     Route::get('/user/post', [AuthController::class, 'user_posts']);

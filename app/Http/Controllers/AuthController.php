@@ -17,8 +17,6 @@ use App\Http\Resources\UserPostsResource\UserPostsResource;
 
 class AuthController extends Controller
 {
-
-    
     public function register(Request $request){
         $request->validate([
             'name' => 'required',
@@ -128,8 +126,9 @@ class AuthController extends Controller
                 'message'=>'Old password does not matched',
             ],400);
         }
-        
     }
+
+    // ------ get user post
     public function user_posts()
     {
         $users = User::all();
