@@ -38,7 +38,7 @@ class AddFreindController extends Controller
             $friendRequest = AddFreind::create([
                 'sender_id' => $sender_id,
                 'receiver_id' => $receiver_id,
-                'status' => 'pending'  // Assuming 'pending' is the intended initial status
+                'status' => false  // Assuming 'pending' is the intended initial status
             ]);
     
             return response()->json([
@@ -54,6 +54,29 @@ class AddFreindController extends Controller
             ], 500);  // HTTP 500 Internal Server Error
         }
     }
+
+    public function confirmRequest(Request $request, $id)
+    {
+        // Find the friend request by ID
+        $friendRequest = AddFreind::find($id);
+
+        // Check if the friend request exists and the authenticated user is the receiver
+        if (!$friendRequest || $friendRequest->receiver_id !== auth()->id()) {
+            return response()->json(['message' => 'Friend request not found or unauthorized'], 404);
+        }
+
+        // Update the status to 'confirmed'
+        $friendRequest->status = true;
+        $friendRequest->save();
+
+        return response()->json([
+            'data' => $friendRequest,
+            'message' => 'Friend request confirmed successfully',
+            'success' => true,
+        ]);
+    }
+
+   
     
     /**
      * Display the specified resource.
