@@ -31,6 +31,7 @@ class AddFreindController extends Controller
         });
 
         return response()->json([
+            'friend_mumber' => $friends->count(),
             'friends' => $friends,
             'message' => 'Request friends successfully',
             'success' => true,
