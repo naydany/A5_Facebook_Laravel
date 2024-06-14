@@ -91,7 +91,7 @@ class AuthController extends Controller
         ],200);
     }
     
-    public function index(Request $request)
+    public function indesx(Request $request)
     {
         $user = $request->user();
         $permissions = $user->getAllPermissions();

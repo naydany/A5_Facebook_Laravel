@@ -14,30 +14,36 @@ class AddFreindController extends Controller
      * Display a listing of the resource.
      */
 
-    public function Friends($id)
-    {
-        $friends = AddFreind::where('sender_id', $id)
-            ->orWhere('receiver_id', $id)
-            ->with('receiver')
-            ->get(['id', 'receiver_id']);
-
-        $friends = $friends->map(function ($friend) {
-            return [
-                'id' => $friend->id,
-                'receiver_name' => $friend->receiver->name,
-                'email' => $friend->receiver->email,
-                'image' => $friend->receiver->image,
-            ];
-        });
-
-        return response()->json([
-            'friend_mumber' => $friends->count(),
-            'friends' => $friends,
-            'message' => 'Request friends successfully',
-            'success' => true,
-        ]);
-    }
-
+     public function friendList()
+     {
+         $userId = auth()->id();
+     
+         // Fetch all confirmed friends where the user is either the sender or receiver
+         $confirmedFriends = AddFreind::where('status', true)
+             ->where(function ($query) use ($userId) {
+                 $query->where('sender_id', $userId)
+                       ->orWhere('receiver_id', $userId);
+             })
+             ->get();
+     
+         // Collect friend details
+         $friends = $confirmedFriends->map(function ($friendship) use ($userId) {
+             $friendId = ($friendship->sender_id == $userId) ? $friendship->receiver_id : $friendship->sender_id;
+             $friend = User::find($friendId);
+             return [
+                 'id' => $friend->id,
+                 'name' => $friend->name,
+                 'email' => $friend->email,
+             ];
+         });
+     
+         return response()->json([
+             'data' => $friends,
+             'message' => 'List of confirmed friends retrieved successfully',
+             'success' => true,
+         ]);
+     }
+     
     /**
      * Store a newly created resource in storage.
      */
