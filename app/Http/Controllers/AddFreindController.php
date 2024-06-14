@@ -6,17 +6,44 @@ use App\Models\AddFreind;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Http\Resources\FriendResource;
 
 class AddFreindController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
-    }
 
+     public function friendList()
+     {
+         $userId = auth()->id();
+     
+         // Fetch all confirmed friends where the user is either the sender or receiver
+         $confirmedFriends = AddFreind::where('status', true)
+             ->where(function ($query) use ($userId) {
+                 $query->where('sender_id', $userId)
+                       ->orWhere('receiver_id', $userId);
+             })
+             ->get();
+     
+         // Collect friend details
+         $friends = $confirmedFriends->map(function ($friendship) use ($userId) {
+             $friendId = ($friendship->sender_id == $userId) ? $friendship->receiver_id : $friendship->sender_id;
+             $friend = User::find($friendId);
+             return [
+                 'id' => $friend->id,
+                 'name' => $friend->name,
+                 'email' => $friend->email,
+             ];
+         });
+     
+         return response()->json([
+             'data' => $friends,
+             'message' => 'List of confirmed friends retrieved successfully',
+             'success' => true,
+         ]);
+     }
+     
     /**
      * Store a newly created resource in storage.
      */
@@ -59,6 +86,7 @@ class AddFreindController extends Controller
     {
         // Find the friend request by ID
         $friendRequest = AddFreind::find($id);
+        // return $id.' '.$friendRequest->receiver_id;
 
         // Check if the friend request exists and the authenticated user is the receiver
         if (!$friendRequest || $friendRequest->receiver_id !== auth()->id()) {

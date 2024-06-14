@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\AddFreindController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeCommentController;
+use App\Http\Controllers\AddFreindController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +33,7 @@ Route::prefix('auth')->group(function(){
 
 });
 
-Route::post('/addlike',[LikesController::class,'addLike'])->middleware('auth:sanctum');
+Route::post('/add-like',[LikesController::class,'addLike'])->middleware('auth:sanctum');
 
 // group profile
 Route::group([
@@ -61,9 +61,13 @@ Route::prefix('auth')->group(function(){
     Route::delete('/post/delete/{id}', [PostController::class, 'destroy']);
 });
 
+// request to friends
+// Route::post('/send-request', [AddFreindController::class, 'sendRequest']);
+Route::get('/Friends/list/{id}', [AddFreindController::class, 'Friends']);
+
 Route::prefix('auth')->group(function(){
     Route::middleware('auth:sanctum')->post('/friend-request', [AddFreindController::class, 'sendRequest']);
     Route::middleware('auth:sanctum')->post('/friend-request/confirm/{id}', [AddFreindController::class, 'confirmRequest']);
     Route::middleware('auth:sanctum')->delete('/friend-request/{id}', [AddFreindController::class, 'deleteRequest']);
-    Route::middleware('auth:sanctum')->get('/show-friend', [AddFreindController::class, 'showFriend']);
+    Route::middleware('auth:sanctum')->get('/friends/list', [AddFreindController::class, 'friendList']);
 });

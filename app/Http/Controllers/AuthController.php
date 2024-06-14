@@ -10,7 +10,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use App\Http\Resources\ShowUserPostsResource;
-use App\Http\Resources\UserPostsResource;
+use App\Http\Resources\UserPostsResource as ResourcesUserPostsResource;
+use App\Http\Resources\UserPostsResource\UserPostsResource;
+// use App\Http\Resources\UserPostsResource;
 
 
 class AuthController extends Controller
@@ -132,7 +134,7 @@ class AuthController extends Controller
     {
         $users = User::all();
         try{
-            return response()->json(['data' => UserPostsResource::collection($users), 'success'=>true, 'message'=>'get user post successfully', 'status'=>200]);
+            return response()->json(['data' => ResourcesUserPostsResource::collection($users), 'success'=>true, 'message'=>'get user post successfully', 'status'=>200]);
         }catch (\Exception $e){
             return response()->json(['data' => $e->getMessage(),'success'=>false,'message'=>$e->getMessage(),'status'=>404]);
         }
