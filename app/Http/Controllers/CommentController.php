@@ -45,11 +45,12 @@ class CommentController extends Controller
             ]);
         }
     }
+    
 
     /**
      * Display the specified resource.
      */
-    public function show(CommentRe $comment, string|int $id)
+    public function show(CommentRequest $comment, string|int $id)
     {
         //
         $comment = Comment::findOrFail($id);
@@ -93,7 +94,7 @@ class CommentController extends Controller
         $comment->delete();
         try{
             $comment = new CommentResource($comment);
-            return response()->json(['message'=>'Delete comments successfully']);
+            return response()->json(['delete'=> true,'message'=>'Delete comments successfully']);
         }catch(Exception $e){
             return response()->json([
                'comment' => false,
