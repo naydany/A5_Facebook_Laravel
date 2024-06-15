@@ -2,19 +2,22 @@
 
 namespace App\Mail;
 
+// use Faker\Provider\ar_EG\Address;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
+// use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Content;
+// use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Address;
 
 class WelcomeMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $MailMessage;
+    public $mailMessage;
     public $subject;
+    public $codeRandom;
     
     /**
      * Create a new message instance.
@@ -22,10 +25,11 @@ class WelcomeMail extends Mailable
      * @param string $message
      * @param string $subject
      */
-    public function __construct($message, $subject)
+    public function __construct($message, $subject,$codeRandom)
     {
-        $this->MailMessage = $message;
+        $this->mailMessage = $message;
         $this->subject = $subject;
+        $this->codeRandom = $codeRandom;
     }
 
     /**
@@ -36,6 +40,10 @@ class WelcomeMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
+            from: new Address('dany.nay.2000@gmail.com','Programming Fields'),
+            replyTo:[
+                new Address('dany.nay@student.passerellesnumeriques.org','Programming Fields')
+            ],
             subject: $this->subject,
         );
     }
@@ -48,16 +56,14 @@ class WelcomeMail extends Mailable
     // public function content(): Content
     // {
     //     return new Content(
-    //         view: 'mail-template.welcome-mail',
-    //         with: ['MailMessage' => $this->MailMessage],
+    //         view: 'welcome-mail',
+    //         with: ['Message' => $this->message],
     //     );
     // }
 
     public function build()
     {
-        return $this->subject('Welcome to Our Service')
-                    ->view('mail-template.welcome-mail')
-                    ->with(['MailMessage' => $this->MailMessage]);
+        return $this->view('mail-template.welcome-mail');
     }
 
     /**
