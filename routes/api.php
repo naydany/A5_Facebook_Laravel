@@ -1,15 +1,18 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ChangPassword\ForgetPassword;
+use App\Http\Controllers\ForgetPassword;
 use App\Http\Controllers\LikesController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
+// use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeCommentController;
 use App\Http\Controllers\AddFreindController;
+use App\Http\Controllers\TestController;
+
+// use App\Http\Controllers\LikeCommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +25,8 @@ use App\Http\Controllers\AddFreindController;
 |
 */
 
+Route::post('/test',[TestController::class,'test']);
+
 Route::prefix('auth')->group(function(){
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/register', [AuthController::class, 'register']);
@@ -29,7 +34,7 @@ Route::prefix('auth')->group(function(){
     Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
     Route::post('/change_password',[AuthController::class,'change_password'])->middleware('auth:sanctum');
 
-    Route::get('/reset_password',[ForgetPassword::class,'sendWelcomeEmail'])->middleware('auth:sanctum');
+    Route::post('/reset_password',[ForgetPassword::class,'sendWelcomeEmail']);
     Route::post('/verify-code',[AuthController::class,'verify-code'])->middleware('auth:sanctum');
     Route::post('/change_password',[AuthController::class,'change_password'])->middleware('auth:sanctum');
 
