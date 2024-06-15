@@ -4,20 +4,15 @@
         "title": "APIs For Thrift Store",
         "version": "1.0.0"
     },
-    "servers": [
-        {
-            "url": "/api"
-        }
-    ],
     "paths": {
-        "/api/user": {
+        "/api/home": {
             "post": {
                 "tags": [
-                    "User"
+                    "Home"
                 ],
-                "summary": "User data",
+                "summary": "Home data",
                 "description": "",
-                "operationId": "deec9e6c3fa0877219273b15884c14f6",
+                "operationId": "abafb0f86a9cf6ab5f4b5926383645d6",
                 "parameters": [
                     {
                         "name": "name",
@@ -33,19 +28,7 @@
                     "200": {
                         "description": "OK",
                         "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "name": {
-                                            "type": "string"
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
+                            "application/json": {}
                         }
                     }
                 }
