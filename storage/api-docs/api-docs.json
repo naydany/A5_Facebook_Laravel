@@ -38,28 +38,6 @@
                     }
                 }
             }
-        },
-        "/api/auth/profile/detail": {
-            "get": {
-                "tags": [
-                    "Profiles"
-                ],
-                "summary": "Get user profile",
-                "operationId": "c272976fd5becd840169749eb55d1f95",
-                "responses": {
-                    "200": {
-                        "description": "Successful operation"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            }
         }
     },
     "components": {
