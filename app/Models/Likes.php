@@ -11,7 +11,6 @@ class Likes extends Model
     use HasFactory,SoftDeletes;
 
     protected $fillable =[
-        'emoji_id',
         'post_id',
         'user_id',
     ];
