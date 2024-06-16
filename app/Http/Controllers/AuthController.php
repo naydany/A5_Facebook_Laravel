@@ -98,34 +98,7 @@ class AuthController extends Controller
         ]);
     }
 
-    // ---------- change_password
-    public function change_password(Request $request){
-        $validator = Validator::make($request->all(),[
-            'old_password'=>'required',
-            'password' => 'required|min:6|max:100',
-            'confirm_password'=>'required|same:password'
-        ]);
-        if($validator->fails()){
-            return response()->json([
-                'message'=>'Validations fails',
-                'error' =>$validator->errors()
-            ],422);
-        }
-        $user = $request->user();
-        if(Hash::check($request->old_password,$user->password)){
-            $user->update([
-                'password'=>Hash::make($request->password)
-            ]);
-            return response()->json([
-                'message' => 'Password successfull updated',
-            ],400);
-        }else{
-            return response()->json([
-                'message'=>'Old password does not matched',
-            ],400);
-        }
-    }
-
+   
     // ------ get user post
     public function user_posts()
     {

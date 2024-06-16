@@ -27,5 +27,9 @@ class Post extends Model
     {
         return $this->hasMany(Likes::class,'post_id');
     }
+    public function getComments():HasMany
+    {
+        return $this->hasMany(Comment::class,'post_id');
+    }
 }
 

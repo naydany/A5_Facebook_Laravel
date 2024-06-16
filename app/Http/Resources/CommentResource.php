@@ -24,9 +24,11 @@ class CommentResource extends JsonResource
             'user_name' => $this->user->name,
             'user_email' => $this->user->email,
             'user_image' => $this->user->image,
+            'post_name' => $this->post->title,
+            'user_name' => $this->user,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'total_comment' => Comment::where('post_id', $this->post_id)->count(),
+            // 'total_comment' => Comment::where('post_id', $this->post_id)->count(),
         ];
     }
 }
