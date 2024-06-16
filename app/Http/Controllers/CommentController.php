@@ -7,12 +7,34 @@ use App\Models\Comment;
 use App\Http\Requests\CommentRequest;
 use App\Http\Resources\CommentResource;
 use Exception;
+/**
+ * @OA\Swagger(
+ *   basePath="/api",
+ *   @OA\Info(
+ *     title="Comment API",
+ *     version="1.0.0",
+ *     description="API documentation for comments"
+ *   )
+ * )
+ */
 
+/**
+ * @OA\Get(
+ *     path="/api/auth/comment/list",
+ *     summary="Get a list of comments",
+ *     tags={"Comment"},
+ *     @OA\Response(response=200, description="Successful operation"),
+ *     @OA\Response(response=400, description="Invalid request")
+ * )
+ */
 class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    /**
+    * @return \Illuminate\Http\JsonResponse
+    */
     public function index()
     {
         //

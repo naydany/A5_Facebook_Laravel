@@ -1,54 +1,64 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "APIs For Thrift Store",
+        "title": "Swagger with Laravel",
         "version": "1.0.0"
     },
-    "servers": [
-        {
-            "url": "/api"
-        }
-    ],
     "paths": {
-        "/api/user": {
-            "post": {
+        "/api/auth/comment/list": {
+            "get": {
                 "tags": [
-                    "User"
+                    "Comment"
                 ],
-                "summary": "User data",
-                "description": "",
-                "operationId": "deec9e6c3fa0877219273b15884c14f6",
-                "parameters": [
-                    {
-                        "name": "name",
-                        "in": "query",
-                        "description": "Provide your name",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
+                "summary": "Get a list of comments",
+                "operationId": "ff4c0537cbdf682f459d5164e6624c48",
                 "responses": {
                     "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "name": {
-                                            "type": "string"
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid request"
                     }
                 }
+            }
+        },
+        "/api/auth/post": {
+            "get": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Get a list of posts",
+                "operationId": "52196132aa3b2daa296d3e970017c9b5",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid request"
+                    }
+                }
+            }
+        },
+        "/api/auth/profile/detail": {
+            "get": {
+                "tags": [
+                    "Profiles"
+                ],
+                "summary": "Get user profile",
+                "operationId": "c272976fd5becd840169749eb55d1f95",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         }
     },
@@ -56,8 +66,6 @@
         "securitySchemes": {
             "bearerAuth": {
                 "type": "http",
-                "name": "bearerAuth",
-                "in": "header",
                 "bearerFormat": "JWT",
                 "scheme": "bearer"
             }

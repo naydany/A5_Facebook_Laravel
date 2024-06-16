@@ -10,22 +10,43 @@ use App\Http\Resources\PostResource;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 
+/**
+ * @OA\Swagger(
+ *   basePath="/api",
+ *   @OA\Info(
+ *     title="Post API",
+ *     version="1.0.0",
+ *     description="API documentation for posts"
+ *   )
+ * )
+ */
+
+/**
+ * @OA\Get(
+ *     path="/api/auth/post",
+ *     summary="Get a list of posts",
+ *     tags={"Post"},
+ *     @OA\Response(response=200, description="Successful operation"),
+ *     @OA\Response(response=400, description="Invalid request")
+ * )
+ */
+
 class PostController extends Controller
 {
-    /*
+    /**
      * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        //
-        try{
+        try {
             $posts = Post::all();
-            return response()->json(['data'=> PostResource::collection($posts), 'success' => true, 'message' => 'get all posts successfully', 'status'=>200]);
-        }catch(\Exception $e){
-            return response()->json(['data'=> $e->getMessage(), 'success'=> false, 'message'=> $e->getMessage(),'status'=>404]);
+            return response()->json(['data' => PostResource::collection($posts), 'success' => true, 'message' => 'Retrieved all posts successfully', 'status' => 200]);
+        } catch (\Exception $e) {
+            return response()->json(['data' => $e->getMessage(), 'success' => false, 'message' => 'Failed to retrieve posts', 'status' => 404]);
         }
     }
-
 
     /*
      * Store a newly created resource in storage.

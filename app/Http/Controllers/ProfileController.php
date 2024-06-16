@@ -8,9 +8,14 @@ use Exception;
 use Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
-
 class ProfileController extends Controller
 {
+    /**
+    * Display a listing of the resource.
+    */
+    /**
+    * @return \Illuminate\Http\JsonResponse
+    */
     public function profile()
     {
         $userData = auth()->user();
