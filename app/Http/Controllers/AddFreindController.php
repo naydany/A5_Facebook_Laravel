@@ -88,6 +88,7 @@ class AddFreindController extends Controller
         // Find the friend request by ID
         $friendRequest = AddFreind::find($id);
         // return $id.' '.$friendRequest->receiver_id;
+        // return AddFreind::all();
 
         // Check if the friend request exists and the authenticated user is the receiver
         if (!$friendRequest || $friendRequest->receiver_id !== auth()->id()) {

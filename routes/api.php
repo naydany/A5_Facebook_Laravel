@@ -63,11 +63,11 @@ Route::prefix('comment')->group(function(){
 
 // create posts
 Route::prefix('post')->group(function(){
-    Route::get('/post', [PostController::class,'index']);
-    Route::get('/post/show/{id}', [PostController::class, 'show']);
-    Route::post('/post/create', [PostController::class, 'store']);
-    Route::put('/post/edit/{id}', [PostController::class, 'update']);
-    Route::delete('/post/delete/{id}', [PostController::class, 'destroy']);
+    Route::get('/list', [PostController::class,'index']);
+    Route::get('/show/{id}', [PostController::class, 'show']);
+    Route::post('/create', [PostController::class, 'store']);
+    Route::put('/edit/{id}', [PostController::class, 'update']);
+    Route::delete('/delete/{id}', [PostController::class, 'destroy']);
 
     Route::post('/add-like',[LikesController::class,'addLike'])->middleware('auth:sanctum');
 });
@@ -77,9 +77,9 @@ Route::prefix('post')->group(function(){
 // Route::get('/Friends/list/{id}', [AddFreindController::class, 'Friends']);
 
 Route::prefix('auth')->group(function(){
-    Route::middleware('auth:sanctum')->post('/friend-request', [AddFreindController::class, 'sendRequest']);
-    Route::middleware('auth:sanctum')->post('/friend-request/confirm/{id}', [AddFreindController::class, 'confirmRequest']);
-    Route::middleware('auth:sanctum')->delete('/friend-request/{id}', [AddFreindController::class, 'deleteRequest']);
-    Route::middleware('auth:sanctum')->get('/friends/list', [AddFreindController::class, 'friendList']);
+    Route::post('/friend-request', [AddFreindController::class, 'sendRequest'])->middleware('auth:sanctum');
+    Route::post('/friend-request/confirm/{id}', [AddFreindController::class, 'confirmRequest'])->middleware('auth:sanctum');
+    Route::delete('/friend-request/{id}', [AddFreindController::class, 'deleteRequest'])->middleware('auth:sanctum');
+    Route::get('/friends/list', [AddFreindController::class, 'friendList'])->middleware('auth:sanctum');
 });
     
