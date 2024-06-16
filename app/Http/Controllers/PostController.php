@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Validator;
 
 /**
  * @OA\Get(
- *     path="/api/auth/post",
+ *     path="/api/post/list",
  *     summary="Get a list of posts",
  *     tags={"Post"},
  *     @OA\Response(response=200, description="Successful operation"),

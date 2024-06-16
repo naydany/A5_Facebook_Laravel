@@ -5,13 +5,13 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/api/auth/comment/list": {
+        "/api/comment/list": {
             "get": {
                 "tags": [
                     "Comment"
                 ],
                 "summary": "Get a list of comments",
-                "operationId": "ff4c0537cbdf682f459d5164e6624c48",
+                "operationId": "0653e36edf911aedd8954cf91aed7ce4",
                 "responses": {
                     "200": {
                         "description": "Successful operation"
@@ -22,13 +22,13 @@
                 }
             }
         },
-        "/api/auth/post": {
+        "/api/post/list": {
             "get": {
                 "tags": [
                     "Post"
                 ],
                 "summary": "Get a list of posts",
-                "operationId": "52196132aa3b2daa296d3e970017c9b5",
+                "operationId": "9c66b0202c931d1e840e27fd7c0a65e1",
                 "responses": {
                     "200": {
                         "description": "Successful operation"

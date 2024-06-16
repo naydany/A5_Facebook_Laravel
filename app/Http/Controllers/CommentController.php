@@ -20,7 +20,7 @@ use Exception;
 
 /**
  * @OA\Get(
- *     path="/api/auth/comment/list",
+ *     path="/api/comment/list",
  *     summary="Get a list of comments",
  *     tags={"Comment"},
  *     @OA\Response(response=200, description="Successful operation"),
