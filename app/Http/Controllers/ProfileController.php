@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
 class ProfileController extends Controller
 {
+
     /**
     * Display a listing of the resource.
     */

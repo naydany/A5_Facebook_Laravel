@@ -65,7 +65,7 @@ Route::prefix('comment')->group(function(){
 Route::prefix('post')->group(function(){
     Route::get('/list', [PostController::class,'index']);
     Route::get('/show/{id}', [PostController::class, 'show']);
-    Route::post('/create', [PostController::class, 'store']);
+    Route::post('/store', [PostController::class, 'store']);
     Route::put('/edit/{id}', [PostController::class, 'update']);
     Route::delete('/delete/{id}', [PostController::class, 'destroy']);
 
@@ -76,7 +76,7 @@ Route::prefix('post')->group(function(){
 // Route::post('/send-request', [AddFreindController::class, 'sendRequest']);
 // Route::get('/Friends/list/{id}', [AddFreindController::class, 'Friends']);
 
-Route::prefix('auth')->group(function(){
+Route::prefix('post')->group(function(){
     Route::post('/friend-request', [AddFreindController::class, 'sendRequest'])->middleware('auth:sanctum');
     Route::post('/friend-request/confirm/{id}', [AddFreindController::class, 'confirmRequest'])->middleware('auth:sanctum');
     Route::delete('/friend-request/{id}', [AddFreindController::class, 'deleteRequest'])->middleware('auth:sanctum');
